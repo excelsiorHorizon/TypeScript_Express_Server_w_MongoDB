@@ -1,0 +1,30 @@
+ bonuses worth doing
+ - TypeScript
+ - TDD
+ - README
+ - orderable tile content
+ * last
+ - frontend
+
+ strecth
+ - orderable tiles
+
+
+PROJECT OUTLINE
+
+*  Express server
+*  Product card stored in monogoDB
+*  Schema supports different product types 
+   Put endpoint to update item in DB
+   Convert to TypeScript
+   Use SuperTest
+   orderable tile content
+    - tile_content_order = [price,product name,]
+   Basic frontend / pseduo postman 
+   README
+
+   readup
+
+   - mongoose
+   - single table inheritance
+     - pros and cons
