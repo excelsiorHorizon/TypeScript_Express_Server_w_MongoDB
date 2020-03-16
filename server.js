@@ -18,14 +18,14 @@ app.post('/beer_products', (req, res) => {
 
   productInstance.save(err => {
     if (err) console.error(err);
-    res.send(productInstance);
+    res.status(200).send(productInstance);
   });
 });
 
 app.get('/beer_products', (req, res) => {
   const query = BeerProduct.find();
   const queryResult = query.exec();
-  queryResult.then(data => res.send(data));
+  queryResult.then(data => res.status(200).send(data));
 });
 
 app.put('/beer_products', (req, res) => {
@@ -36,14 +36,16 @@ app.put('/beer_products', (req, res) => {
   BeerProduct.findByIdAndUpdate({ _id }, dataToUpdate).then(() => {
     BeerProduct.findOne({ _id }).then(data => {
       console.log('data in find one', data);
-      res.send(data);
+      res.status(200).send(data);
     });
   });
 });
 
 app.delete('/beer_products', (req, res) => {
   const { _id } = req.body;
-  BeerProduct.findOneAndDelete({ _id }).then(data => res.send(data));
+  BeerProduct.findOneAndDelete({ _id }).then(data =>
+    res.status(200).send(data)
+  );
 });
 
 const PORT = 3000;

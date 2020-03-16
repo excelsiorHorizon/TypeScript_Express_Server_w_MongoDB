@@ -55,8 +55,8 @@ describe('BeerProduct Model Test', () => {
   it('Data returned from beer_products get endpoint should contain newly created product', async () => {
     let containsId = false;
     try {
-      const response = await axios.get('http://localhost:3000/beer_products');
-      for (const product of response.data) {
+      const { data } = await axios.get('http://localhost:3000/beer_products');
+      for (const product of data) {
         if (product._id === testID) {
           containsId = true;
           productRes = product;
