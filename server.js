@@ -13,12 +13,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello from our server!');
-});
-
 app.post('/beer_products', (req, res) => {
-  console.log('post hit ');
   const productInstance = new BeerProduct(req.body.product);
 
   productInstance.save(err => {
@@ -34,10 +29,21 @@ app.get('/beer_products', (req, res) => {
 });
 
 app.put('/beer_products', (req, res) => {
-  const { _id, dataToUpdate } = req.body;
+  console.log('put hit');
+  console.log('body:', req.body);
+  const { _id, dataToUpdate } = req.body.data;
+
   BeerProduct.findByIdAndUpdate({ _id }, dataToUpdate).then(() => {
-    BeerProduct.findOne({ _id }).then(data => res.send(data));
+    BeerProduct.findOne({ _id }).then(data => {
+      console.log('data in find one', data);
+      res.send(data);
+    });
   });
+});
+
+app.delete('/beer_products', (req, res) => {
+  const { _id } = req.body;
+  BeerProduct.findOneAndDelete({ _id }).then(data => res.send(data));
 });
 
 const PORT = 3000;

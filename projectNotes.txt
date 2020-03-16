@@ -15,9 +15,9 @@ PROJECT OUTLINE
 *  Express server
 *  Product card stored in monogoDB
 *  Schema supports different product types 
-   Put endpoint to update item in DB
+*   Put endpoint to update item in DB
    Convert to TypeScript
-   Use SuperTest
+*  Use SuperTest
    orderable tile content
     - tile_content_order = [price,product name,]
    Basic frontend / pseduo postman 

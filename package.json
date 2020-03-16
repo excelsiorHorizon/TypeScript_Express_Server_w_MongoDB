@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.4",
@@ -15,7 +16,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "start": "node server.js"
   },
   "author": "",
