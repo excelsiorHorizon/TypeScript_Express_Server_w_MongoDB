@@ -1,5 +1,21 @@
 # Anheuser-Busch InBev: Code challenge
 
+# Technology Used:
+
+- Node/Express
+- TypeScript
+- MonogoDB/Mongoose
+- Jest (TDD)
+- Axios
+
+# Project Requirements
+
+When approaching the design of the database, even though the type of product implied was beverage, I wanted to make sure that the Schema flexible enough to account for the possiblity of non-beverage items being added to the database. In src/models.ts you will see that I opted for a single table inheritance approach by creating a parent "Product" Schema, which contains universal product properties and a "Beer Product" Schema, which contains properties specific to beer. This gives the codebase the flexibilty to add additional child Schemas in the event that other categories of product need to be added to the database. Another major benefit to this approach is that you avoid wasting memory by not having to store unnecessary properties due to generic Schemas.
+
+Bonus:
+
+Both the server and database code have been written in TypeScript. The requested CRU endpoints have been created + the addition of an delete endpoint. A testing suite in Jest has been created to test the integrity of each of the CRUD endpoints.
+
 ## Installation
 
 Before running an local installation of MongoDB is necessary for the project to run.
