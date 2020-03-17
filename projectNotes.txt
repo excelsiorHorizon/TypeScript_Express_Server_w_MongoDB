@@ -16,7 +16,7 @@ PROJECT OUTLINE
 *  Product card stored in monogoDB
 *  Schema supports different product types 
 *   Put endpoint to update item in DB
-   Convert to TypeScript
+*   Convert to TypeScript
 *  Use SuperTest
    orderable tile content
     - tile_content_order = [price,product name,]

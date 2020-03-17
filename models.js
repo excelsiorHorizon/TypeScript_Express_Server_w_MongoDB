@@ -33,14 +33,3 @@ module.exports = {
   BeerProduct,
 };
 
-// const BeerSchema = new Schema({
-//   // img_url: String,
-//   type: String,
-//   product_name: String,
-//   package_quantity: Number,
-//   unit_volume: Number,
-//   unit_measurment_type: String,
-//   container_type: String,
-//   // product_description: String,
-//   // current_offer: String,
-// });
