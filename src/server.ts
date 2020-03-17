@@ -32,13 +32,17 @@ app.get('/beer_products', (req: Request, res: Response) => {
     res.status(200).send(data)});
 });
 
-app.put('/beer_products', (req: Request, res: Response) => {
-  const { _id, dataToUpdate } = req.body;
-  BeerProduct.findByIdAndUpdate({ _id }, dataToUpdate).then(() => {
-    BeerProduct.findOne({ _id }).then((data: JSON) => {
+app.put('/beer_products/:id', (req: Request, res: Response) => {
+  const query = BeerProduct.findOneAndUpdate(
+    { _id: req.params.id }, 
+    req.body.product, 
+    { new: true }, 
+    (err: Error, data: JSON) => {
+      console.log('data in put: ', data)
       res.status(200).send(data);
-    });
-  });
+    }
+  )
+  
 });
 
 app.delete('/beer_products', (req: Request, res: Response) => {
