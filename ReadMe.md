@@ -2,7 +2,7 @@
 
 ## Installation
 
-In order to run this server it will be necessary to first install MongoDB.
+Before running an local installation of MongoDB is necessary for the project to run.
 
 If already installed skip to next section.
 
@@ -11,35 +11,37 @@ https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installa
 
 ## Initializing the Server Environment
 
-Once you have MongoDB installed its time to initialize the server envinronment using the following commands.
-
-From the top level of the app enter to load the required dependencies:
+Once you have MongoDB installed to initialize the server envinronment use the following commands.
 
 `npm install`
 
-next its time to compile our TypeScript code into ES6 JS:
+Next its time to compile our TypeScript code into ES6 JS:
 
 `npm run build`
 
-This command will also create a folder called dist to store the code.
+This command will create a dist folder to store the code.
 
 Now to run the JS server enter:
 
 `npm start`
 
-In the console you should see a notification indicating that our server is now running on port 3000 and that a successful
-connection to the database has been created.
+In the console you should see a notification indicating that our server is now running on port 3000 and that a successful connection to the database has been created.
+
+A development TypeScript version of the server can also be ran by entering:
+
+`npm run dev`
+
+## Testing
 
 To test the integrity of the API endpoints a suite of tests has been built to test the functionality of the following.
 
 GET - POST - PUT - DELETE
 
-To run the tests enter:
+To run the test suite enter:
 
 `npm run test`
 
-The output to the console will list the results of the test.
+*Note in order for the tests to run, the JS version of the server must first be built.
 
-Note in order for the tests to run, the JS version of the server must first be built. 
 
 
