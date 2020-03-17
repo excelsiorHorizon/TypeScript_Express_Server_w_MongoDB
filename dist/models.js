@@ -11,11 +11,11 @@ const ProductSchema = new mongoose_1.Schema({
     package_quantity: Number,
 }, options);
 const Product = mongoose_1.model('Product', ProductSchema);
-exports.BeerProduct = Product.discriminator('BeerProduct', new mongoose_1.Schema({
+const BeerProduct = Product.discriminator('BeerProduct', new mongoose_1.Schema({
     container_type: String,
     unit_volume: Number,
     unit_measurment_type: String,
 }, options));
-// module.exports = {
-//   BeerProduct,
-// };
+module.exports = {
+    BeerProduct,
+};

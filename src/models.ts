@@ -1,7 +1,7 @@
-import {Schema, Model , model, Document, SchemaOptions} from 'mongoose';
+import { Schema, Model , model, Document } from 'mongoose';
 
 // Setup schemas
-const options: any  = { dicriminatorKey: 'type' };
+const options:any = { dicriminatorKey: 'type' };
 
 const ProductSchema: Schema = new Schema(
   {
