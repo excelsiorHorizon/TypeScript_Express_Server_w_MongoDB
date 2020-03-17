@@ -33,11 +33,14 @@ app.get('/beer_products', (req: Request, res: Response) => {
 });
 
 app.put('/beer_products/:id', (req: Request, res: Response) => {
+  console.log('bod ',req.body)
+  console.log('id ',req.params.id)
   const query = BeerProduct.findOneAndUpdate(
     { _id: req.params.id }, 
-    req.body.product, 
+    { $set: req.body.product }, 
     { new: true }, 
     (err: Error, data: JSON) => {
+      console.error('? ', err)
       console.log('data in put: ', data)
       res.status(200).send(data);
     }

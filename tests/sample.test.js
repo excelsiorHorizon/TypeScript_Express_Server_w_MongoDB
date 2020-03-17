@@ -2,20 +2,23 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const { BeerProduct } = require('../dist/models.js');
 
-mongoose.connect(
-  'mongodb://127.0.0.1/test_bev_db',
-  { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
-  err => {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-  }
-);
-
 let testBeerData;
 
 describe('BeerProduct API', () => {
+  beforeAll(done => {
+    mongoose.connect(
+      'mongodb://127.0.0.1/test_bev_db',
+      { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
+      err => {
+        if (err) {
+          console.error(err);
+          process.exit(1);
+        }
+        done();
+      }
+    );
+  });
+
   beforeEach(() => {
     testBeerData = {
       product: {
@@ -32,17 +35,22 @@ describe('BeerProduct API', () => {
     };
   });
 
-  afterEach(() => {
-    BeerProduct.deleteMany({}).exec();
+  afterEach(done => {
+    BeerProduct.deleteMany({}, () => done());
+  });
+
+  afterAll(() => {
+    mongoose.disconnect();
   });
 
   it('Creates a beer product', () =>
     axios
       .post('http://localhost:3000/beer_products', testBeerData)
-      .then(data => {
-        BeerProduct.findOne({ _id: data._id }).then(item =>
-          expect(item.product_name).toBe(testBeerData.product.product_name)
-        );
+      .then(res => {
+        console.log('data ', res.data);
+        BeerProduct.findById(res.data._id, item => {
+          expect(item.product_name).toBe(testBeerData.product.product_name);
+        });
       }));
 
   // it('Gets all beer products', async () => {
@@ -54,22 +62,22 @@ describe('BeerProduct API', () => {
   //   expect(postResponse.data._id).toBe(getResponse.data[0]._id);
   // });
 
-  // it('Modifies existing BeerProduct', () => {
-  //   const modifiedBeerData = { product: { product_name: 'Bud Light' } };
-  //   axios
-  //     .post('http://localhost:3000/beer_products', testBeerData)
-  //     .then(postResponse =>
-  //       axios.put(
-  //         `http://localhost:3000/beer_products/${postResponse.data._id}`,
-  //         modifiedBeerData
-  //       )
-  //     )
-  //     .then(putResponse => {
-  //       expect(putResponse.data.product_name).toBe(
-  //         modifiedBeerData.product.product_name
-  //       );
-  //     });
-  // });
+  it('Modifies existing BeerProduct', () => {
+    const modifiedBeerData = { product: { product_name: 'Bud Light' } };
+    axios
+      .post('http://localhost:3000/beer_products', testBeerData)
+      .then(postResponse =>
+        axios.put(
+          `http://localhost:3000/beer_products/${postResponse.data._id}`,
+          modifiedBeerData
+        )
+      )
+      .then(putResponse => {
+        expect(putResponse.data.product_name).toBe(
+          modifiedBeerData.product.product_name
+        );
+      });
+  });
 
   // it('Deletes item from database', async () => {
   //   const postResponse = await axios.post(
